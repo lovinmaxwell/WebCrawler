@@ -428,22 +428,33 @@ $writer->close();
      foreach ($crawler->filter('.sfx-text  a') as $link) {
        $State_data[]=$link;
     }
-for ($i=13; $i <=34 ; $i++) {
+    $State_Link_arr = array( );
+    $state_name=array( );
+    for ($i=0; $i <51 ; $i++) {
+      $State_Link_arr[$i] = 'https://www.statefarm.com'.$State_data[$i]->getAttribute('href');
+      $state_name[$i]=$State_data[$i]->nodeValue;
+      // print_r($State_Link_arr[$i]);echo "<br>";
+      //  echo "<h2>State: ";print_r($state_name[$i]);echo "</h2><br>";
+    }
+    print_r($State_Link_arr);echo "<br>";
+    print_r($state_name);echo "<br>";
+
+for ($ii=14; $ii <=35 ; $ii++) {
   // $state_link = 'https://www.statefarm.com'.$State_data[$i]->getAttribute('href');
 
      // foreach ($crawler->filter('.sfx-text  a') as $link) {
-      $state_link = 'https://www.statefarm.com'.$State_data[$i]->getAttribute('href');
-       $request1 = $client->request('GET','https://www.statefarm.com'.$State_data[$i]->getAttribute('href'));
+      $state_link = $State_Link_arr[$ii];
+       $request1 = $client->request('GET',$State_Link_arr[$ii]);
    // $state_link="https://www.statefarm.com/agent/US/IL";
    //  $request1 = $client->request('GET',$state_link);  #stateListUS #stateListUS > div:nth-child(1) > div > ul > li:nth-child(1)
    //*[@id="stateListUS"]/div[1]/div/ul/li[1]
    //*[@id="stateListUS"]/div[2]/div/ul/li[2]
        $response1 = $request1->getBody()->getContents();
        $crawler1 = new Crawler($response1);
-       echo "<h2>State: ";print_r($State_data[$i]->nodeValue);echo "</h2><br>";
+       echo "<h2>State: ";print_r($state_name[$ii]);echo "</h2><br>";
        $str1 = '.xlsx';
        $str2 = 'D:\OneDrive\Prudence Lab\Shared Reference\Prudence General\Data Mining\stateform\php\full\\';
-       $stateName=$State_data[$i]->nodeValue;
+       $stateName=$state_name[$ii];
        // print_r($stateName);die();
        // $stateName='Illinois';
        $new_str = $str2.$stateName.$str1;
@@ -472,8 +483,8 @@ for ($i=13; $i <=34 ; $i++) {
             $Agent_Name =$crawler3->filter('#AgentNameLabelId > span')->count() > 0 ? $crawler3->filter('#AgentNameLabelId > span')->eq(0)->text(): "";
             // echo "Name :";print_r($Agent_Name);echo "<br>";
             // echo "Agent_Web_Address :";print_r($Agent_link);echo "<br>";
-            for ($i=1; $i <= 3; $i++) {
-              $address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()['.$i.']')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()['.$i.']')->eq(0)->text(): "";
+            for ($iii=1; $iii <= 3; $iii++) {
+              $address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()['.$iii.']')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()['.$iii.']')->eq(0)->text(): "";
               // echo "Add :";print_r($address);echo "<br>";
               $address1=$address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[1]')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[1]')->eq(0)->text(): "";
               $address2=$address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[2]')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[2]')->eq(0)->text(): "";
@@ -519,6 +530,120 @@ for ($i=13; $i <=34 ; $i++) {
      }
 
  }
+
+ function State_form_tx(){
+   $url = 'https://www.statefarm.com/agent/US';
+     $client = new Client();
+     $request = $client->request('GET',$url);
+     $response = $request->getBody()->getContents();
+     $crawler = new Crawler($response);
+     $State_data =array();
+     foreach ($crawler->filter('.sfx-text  a') as $link) {
+       $State_data[]=$link;
+    }
+    $State_Link_arr = array( );
+    $state_name=array( );
+    for ($i=0; $i <51 ; $i++) {
+      $State_Link_arr[$i] = 'https://www.statefarm.com'.$State_data[$i]->getAttribute('href');
+      $state_name[$i]=$State_data[$i]->nodeValue;
+      // print_r($State_Link_arr[$i]);echo "<br>";
+      //  echo "<h2>State: ";print_r($state_name[$i]);echo "</h2><br>";
+    }
+    print_r($State_Link_arr[43]);echo "<br>";
+    // print_r($state_name);echo "<br>";
+
+// for ($ii=14; $ii <=35 ; $ii++) {
+  // $state_link = 'https://www.statefarm.com'.$State_data[$i]->getAttribute('href');
+
+     // foreach ($crawler->filter('.sfx-text  a') as $link) {
+      $state_link = $State_Link_arr[43];
+       $request1 = $client->request('GET',$State_Link_arr[43]);
+   // $state_link="https://www.statefarm.com/agent/US/IL";
+   //  $request1 = $client->request('GET',$state_link);  #stateListUS #stateListUS > div:nth-child(1) > div > ul > li:nth-child(1)
+   //*[@id="stateListUS"]/div[1]/div/ul/li[1]
+   //*[@id="stateListUS"]/div[2]/div/ul/li[2]
+       $response1 = $request1->getBody()->getContents();
+       $crawler1 = new Crawler($response1);
+       echo "<h2>State: ";print_r($state_name[43]);echo "</h2><br>";
+       $str1 = '.xlsx';
+       $str2 = 'D:\OneDrive\Prudence Lab\Shared Reference\Prudence General\Data Mining\stateform\php\full\\';
+       $stateName=$state_name[43];
+       // print_r($stateName);die();
+       // $stateName='Illinois';
+       $new_str = $str2.$stateName.$str1;
+
+       $writer = WriterFactory::Create(Type::XLSX);
+       $output_file = $new_str;
+       $writer->openToFile($output_file);
+       $writer->addRow(['State','City','City_URL','Agent_Name','Agent_WebAddress','Address_Line_1','Address_Line_2','Address_Line_3','Address_Line_4','Address_Line_5','Zip','Phone_Number','Fax','Agent_WebSite','License','Email']);
+
+       foreach ($crawler1->filter('.sfx-text a') as $cities) {
+         // print_r('https://www.statefarm.com'.$cities->getAttribute('href'));
+         $citie='https://www.statefarm.com'.$cities->getAttribute('href');
+         $City_Name=$cities->nodeValue;
+         echo "City &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :";print_r($City_Name);echo "<br>";
+         $request2 = $client->request('GET','https://www.statefarm.com'.$cities->getAttribute('href'));
+         $response2 = $request2->getBody()->getContents();
+         $crawler2 = new Crawler($response2);
+         $AgentDetails = $crawler2->filter('.toggle-content a');
+         foreach ($AgentDetails as $main) {
+           $Agent_link = $main->getAttribute('href');
+           // $temp_test_url="https://www.statefarm.com/agent/US/TX/Flower-mound/Brett-Darby-6HQL93JG000";
+           // $temp_test_url2="https://www.statefarm.com/agent/US/AL/Abbeville/Ron-Abernathy-CYLNB1YS000";
+            $request3 = $client->request('GET',$Agent_link);
+            $response3 = $request3->getBody()->getContents();
+            $crawler3 = new Crawler($response3);
+            $Agent_Name =$crawler3->filter('#AgentNameLabelId > span')->count() > 0 ? $crawler3->filter('#AgentNameLabelId > span')->eq(0)->text(): "";
+            // echo "Name :";print_r($Agent_Name);echo "<br>";
+            // echo "Agent_Web_Address :";print_r($Agent_link);echo "<br>";
+            for ($iii=1; $iii <= 3; $iii++) {
+              $address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()['.$iii.']')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()['.$iii.']')->eq(0)->text(): "";
+              // echo "Add :";print_r($address);echo "<br>";
+              $address1=$address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[1]')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[1]')->eq(0)->text(): "";
+              $address2=$address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[2]')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[2]')->eq(0)->text(): "";
+              $address3=$address =$crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[3]')->count() > 0 ? $crawler3->filterXPath('//*[@id="locStreetContent_mainLocContent"]/text()[3]')->eq(0)->text(): "";
+                }
+                $addressLocality =$crawler3->filter('#panelourLocation > div.span5 > div:nth-child(3) > div:nth-child(2) > span > span:nth-child(1)')->count() > 0 ? $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(3) > div:nth-child(2) > span > span:nth-child(1)')->eq(0)->text(): "";
+                // $City_Name=explode(',',$addressLocality);
+                // die($City_Name[0]);
+                // echo "Address_Line_3 :";print_r($addressLocality);echo "<br>";
+                $addressRegion =$crawler3->filter('#panelourLocation > div.span5 > div:nth-child(3) > div:nth-child(2) > span > span:nth-child(2)')->count() > 0 ? $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(3) > div:nth-child(2) > span > span:nth-child(2)')->eq(0)->text(): "";
+                // echo "Address_Line_4 :";print_r($addressRegion);echo "<br>";
+                $postalCode =$crawler3->filter('#panelourLocation > div.span5 > div:nth-child(3) > div:nth-child(2) > span > span:nth-child(3)')->count() > 0 ? $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(3) > div:nth-child(2) > span > span:nth-child(3)')->eq(0)->text(): "";
+                // echo "ZIP :";print_r($postalCode);echo "<br>";
+            $Phone =$crawler3->filter('#offNumber_tab_mainLocContent_0 > span')->count() > 0 ? $crawler3->filter('#offNumber_tab_mainLocContent_0 > span')->eq(0)->text(): "";
+            // echo "Phone:";print_r($Phone);echo "<br>";
+            $Fax =$crawler3->filter('#faxNumber_mainLocContent > span')->count() > 0 ? $crawler3->filter('#faxNumber_mainLocContent > span')->eq(0)->text(): "";
+            // echo "Fax :";print_r($Fax);echo "<br>";
+
+            if($crawler3->filter('#panelourLocation > div.span5> div.hidden-phone > div:nth-child(2) > span')){
+                $Lic =  $crawler3->filter('#panelourLocation > div.span5> div.hidden-phone > div:nth-child(2) > span')->count() > 0 ?   $crawler3->filter('#panelourLocation > div.span5> div.hidden-phone > div:nth-child(2) > span')->eq(0)->text():"";
+                  }
+            elseif ($crawler3->filter('#panelourLocation > div.span5 > div:nth-child(17) > div:nth-child(2) > span')) {
+                $Lic = $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(17) > div:nth-child(2) > span')->count() > 0 ? $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(17) > div:nth-child(2) > span')->eq(0)->text():"";
+            }
+            elseif ($crawler3->filter('#panelourLocation > div.span5 > div:nth-child(20) > div:nth-child(2) > span')) {
+              $Lic =   $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(20) > div:nth-child(2) > span')->count() > 0 ? $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(20) > div:nth-child(2) > span')->eq(0)->text():"";
+            }
+            elseif ($crawler3->filter('#panelourLocation > div.span5 > div:nth-child(18) > div:nth-child(2) > span')) {
+                $Lic = $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(18) > div:nth-child(2) > span')->count() > 0 ? $crawler3->filter('#panelourLocation > div.span5 > div:nth-child(18) > div:nth-child(2) > span')->eq(0)->text():"";
+            }
+            // echo "Lic:";print_r($Lic);echo "<br>";
+            $website =$crawler3->filter('#agentlink_mainLocContent_0')->count() > 0 ? $crawler3->filter('#agentlink_mainLocContent_0')->eq(0)->text(): "";
+            // echo "website :";print_r($website);echo "<br>";
+            $email="";
+            $writer->addRow([$stateName,$City_Name,$citie,$Agent_Name,$Agent_link,$address1,$address2,$address3,$addressLocality,$addressRegion,$postalCode,$Phone,$Fax,$website,$Lic,$email]);
+            // $writer->addRow(['State','City','City_URL','Agent_Name','Agent_WebAddress','Address_Line_1','Address_Line_2','Address_Line_3','Address_Line_4','Address_Line_5','Zip','Phone_Number','Fax','Agent_WebSite','Email']);
+         // $writer->close();
+          }
+
+
+       }
+           $writer->close();
+     // }
+
+ }
+
 
 
 }
