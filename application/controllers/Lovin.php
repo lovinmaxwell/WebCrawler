@@ -424,19 +424,26 @@ $writer->close();
      $request = $client->request('GET',$url);
      $response = $request->getBody()->getContents();
      $crawler = new Crawler($response);
+     $State_data =array();
      foreach ($crawler->filter('.sfx-text  a') as $link) {
-      $state_link = 'https://www.statefarm.com'.$link->getAttribute('href');echo "<br>";
-       $request1 = $client->request('GET','https://www.statefarm.com'.$link->getAttribute('href'));
+       $State_data[]=$link;
+    }
+for ($i=13; $i <=34 ; $i++) {
+  // $state_link = 'https://www.statefarm.com'.$State_data[$i]->getAttribute('href');
+
+     // foreach ($crawler->filter('.sfx-text  a') as $link) {
+      $state_link = 'https://www.statefarm.com'.$State_data[$i]->getAttribute('href');
+       $request1 = $client->request('GET','https://www.statefarm.com'.$State_data[$i]->getAttribute('href'));
    // $state_link="https://www.statefarm.com/agent/US/IL";
    //  $request1 = $client->request('GET',$state_link);  #stateListUS #stateListUS > div:nth-child(1) > div > ul > li:nth-child(1)
    //*[@id="stateListUS"]/div[1]/div/ul/li[1]
    //*[@id="stateListUS"]/div[2]/div/ul/li[2]
        $response1 = $request1->getBody()->getContents();
        $crawler1 = new Crawler($response1);
-       echo "<h2>State: ";print_r($link->nodeValue);echo "</h2><br>";
+       echo "<h2>State: ";print_r($State_data[$i]->nodeValue);echo "</h2><br>";
        $str1 = '.xlsx';
        $str2 = 'D:\OneDrive\Prudence Lab\Shared Reference\Prudence General\Data Mining\stateform\php\full\\';
-       $stateName=$link->nodeValue;
+       $stateName=$State_data[$i]->nodeValue;
        // print_r($stateName);die();
        // $stateName='Illinois';
        $new_str = $str2.$stateName.$str1;
